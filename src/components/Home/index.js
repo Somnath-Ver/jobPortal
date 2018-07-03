@@ -45,9 +45,7 @@ class Home extends React.Component {
     return (
       <div className="home-page">
 
-        <Banner token={this.props.token} appName={this.props.appName} />
-
-        <div className="container page">
+         <div className="container page">
           <div className="row">
             <MainView />
 

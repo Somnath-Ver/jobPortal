@@ -18,7 +18,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'Verizon Job Portal',
   token: null,
   viewChangeCounter: 0
 };
@@ -46,6 +46,11 @@ export default (state = defaultState, action) => {
         currentUser: action.error ? null : action.payload.user
       };
     case LOGIN:
+        return {
+            ...state,
+            redirectTo: '/home',
+            currentUser: action.payload
+        };
     case REGISTER:
       return {
         ...state,

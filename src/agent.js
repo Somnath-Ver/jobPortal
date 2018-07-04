@@ -40,14 +40,18 @@ const Auth = {
 };
 
 const Tags = {
-  getAll: () => requests.get('/tags')
+    getAll: () => requests.get('/tags')
+};
+const Apply = {
+    apply: (userid, jobid) =>
+        requests.post('/applyjob', {userid, jobid })
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Articles = {
-  all: (userid,page,skill) =>
-    //requests.get(`/listjob?${limit(10, page)}`),
+  all:(userid, page, skill) =>
+    //requests.get(`/articles?${limit(10, page)}`),
         requests.post('/listjob', { userid, page, skill}),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
@@ -95,5 +99,6 @@ export default {
   Comments,
   Profile,
   Tags,
+    Apply,
   setToken: _token => { token = _token; }
 };

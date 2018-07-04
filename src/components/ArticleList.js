@@ -20,9 +20,9 @@ const ArticleList = props => {
   return (
     <div>
       {
-        props.articles.map(article => {
+        props.articles.articles.map(article => {
           return (
-            <ArticlePreview article={article} key={article.slug} />
+            <ArticlePreview article={article} key={article} />
           );
         })
       }

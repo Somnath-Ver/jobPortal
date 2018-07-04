@@ -33,8 +33,8 @@ const Auth = {
     requests.get('/user'),
   login: (email, password) =>
     requests.post('/login', { email, password } ),
-  register: (username, email, password,role) =>
-    requests.post('/register', { username, email, password ,role }),
+  register: (name, email, password,role) =>
+    requests.post('/register', { name, email, password ,role }),
   save: user =>
     requests.put('/user', { user })
 };
@@ -46,8 +46,9 @@ const Tags = {
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Articles = {
-  all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
+  all: (userid,page,skill) =>
+    //requests.get(`/listjob?${limit(10, page)}`),
+        requests.post('/listjob', { userid, page, skill}),
   byAuthor: (author, page) =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>

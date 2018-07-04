@@ -48,15 +48,16 @@ export default (state = defaultState, action) => {
     case LOGIN:
         return {
             ...state,
-            redirectTo: '/home',
-            currentUser: action.payload
+            redirectTo: action.payload.error !='0' ? null : '/home',
+            token: action.payload.error !='0' ? null : action.payload.userid,
+            currentUser: action.payload.error !='0' ? null : action.payload.userid
         };
     case REGISTER:
       return {
         ...state,
-        redirectTo: action.error ? null : '/',
-        token: action.error ? null : action.payload.user.token,
-        currentUser: action.error ? null : action.payload.user
+        redirectTo: action.payload.error !='0' ? null : '/login',
+        token: action.payload.error !='0' ? null : action.payload.userid,
+        currentUser: action.payload.error !='0' ? null : action.payload.userid
       };
     case DELETE_ARTICLE:
       return { ...state, redirectTo: '/' };

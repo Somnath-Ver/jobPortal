@@ -14,7 +14,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         inProgress: false,
-        errors: action.error ? action.payload.errors : null
+        errors: action.payload.error !='0' ? action.payload.error : null
       };
     case LOGIN_PAGE_UNLOADED:
     case REGISTER_PAGE_UNLOADED:

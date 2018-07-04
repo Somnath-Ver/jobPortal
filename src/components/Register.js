@@ -18,8 +18,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
   onChangeUsername: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
-  onSubmit: (username, email, password) => {
-    const payload = agent.Auth.register(username, email, password);
+    onChangerole: value =>
+        dispatch({ type: UPDATE_FIELD_AUTH, key: 'role', value }),
+  onSubmit: (username, email, password,role) => {
+    const payload = agent.Auth.register(username, email, password,role);
     dispatch({ type: REGISTER, payload })
   },
   onUnload: () =>
@@ -32,9 +34,10 @@ class Register extends React.Component {
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
-    this.submitForm = (username, email, password) => ev => {
+      this.changeOption = ev => this.props.onChangerole(ev.target.value);
+    this.submitForm = (username, email, password, role) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(username, email, password);
+      this.props.onSubmit(username, email, password, role);
     }
   }
 
@@ -46,6 +49,7 @@ class Register extends React.Component {
     const email = this.props.email;
     const password = this.props.password;
     const username = this.props.username;
+    const role = this.props.role;
 
     return (
       <div className="auth-page">
@@ -62,9 +66,22 @@ class Register extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
+              <form onSubmit={this.submitForm(username, email, password,role)}>
                 <fieldset>
-
+                    <fieldset className="form-group">
+                        <label><input
+                            className="form-control form-control-lg"
+                            type="radio"
+                            value={"admin"} checked={this.props.role === 'admin'} onChange={this.changeOption}/>Admin
+                        </label>
+                    </fieldset>
+                    <fieldset className="form-group">
+                        <label><input
+                            className="form-control form-control-lg"
+                            type="radio" checked={this.props.role === 'user'}
+                            value={"user"} onChange={this.changeOption}/>User
+                        </label>
+                    </fieldset>
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"

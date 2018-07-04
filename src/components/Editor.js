@@ -107,7 +107,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Article Title"
+                      placeholder="Job Title"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
@@ -116,7 +116,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="What's this article about?"
+                      placeholder="Job description"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
@@ -125,7 +125,7 @@ class Editor extends React.Component {
                     <textarea
                       className="form-control"
                       rows="8"
-                      placeholder="Write your article (in markdown)"
+                      placeholder="Write about job opening"
                       value={this.props.body}
                       onChange={this.changeBody}>
                     </textarea>
@@ -161,7 +161,7 @@ class Editor extends React.Component {
                     type="button"
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}>
-                    Publish Article
+                    Publish Job
                   </button>
 
                 </fieldset>

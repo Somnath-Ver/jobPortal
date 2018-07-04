@@ -7,6 +7,10 @@ import {ARTICLE_FAVORITED, ARTICLE_UNFAVORITED, REGISTER} from '../constants/act
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
 
+const mapStateToProps = state => ({
+    ...state.home,
+    token: state.common.token
+});
 const mapDispatchToProps = dispatch => ({
   favorite: slug => dispatch({
     type: ARTICLE_FAVORITED,
@@ -26,7 +30,7 @@ const ArticlePreview = props => {
 
   const handleClick = ev => {
     ev.preventDefault();
-      const payload = agent.Apply.apply('c29tbjFAdGVzdC5jb20=', article.jobcode);
+      const payload = agent.Apply.apply(props.token, article.jobcode);
       //dispatch({ type: REGISTER, payload })
   };
 
@@ -80,5 +84,5 @@ const ArticlePreview = props => {
     </div>
   );
 }
-
-export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlePreview);
+//export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
